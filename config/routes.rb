@@ -1,4 +1,7 @@
 Forem::Engine.routes.draw do
+  # from routing-filter gem
+  filter :locale
+
   root :to => "forums#index"
 
   resources :categories, :only => [:index, :show]
