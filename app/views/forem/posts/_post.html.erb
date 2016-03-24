@@ -16,7 +16,7 @@
       </div>
     <% end %>
 
-    <div class='contents'>
+    <div class='contents contents-post'>
       <div class='user col-md-2'>
         <div class='username'>
           <% if post.user.is_a?(Forem::NilUser) %>
@@ -28,7 +28,7 @@
         <div class='icon'><%= forem_avatar(post.user, :size => 60) %></div>
       </div>
 
-      <div class='contents col-md-7'>
+      <div class='contents col-md-10'>
         <a href='#post-<%= post.id %>'>
           <%= post_time_tag(post) %>
         </a>
@@ -41,7 +41,7 @@
         <% end %>
 
         <% if forem_user %>
-          <div class='btn-group'>
+          <div class='btn-group col-md-12'>
             <% if can?(:reply, post.topic) %>
               <% if post.topic.can_be_replied_to? %>
                 <%= link_to t('reply', :scope => 'forem.topic'), forem.new_forum_topic_post_path(post.forum, post.topic, :reply_to_id => post.id), :class => "btn btn-primary" %>
