@@ -3,6 +3,15 @@ module Forem
     before_filter :authenticate_forem_user, except: :show
     before_filter :find_topic
     before_filter :reject_locked_topic!, only: [:new, :create]
+    prepend_before_filter :check_user!, :only => [:new] # redirect to login if needed
+
+    def check_user!
+      if !spree_current_user
+        session[:spree_user_return_to] = request.path
+        redirect_to spree.login_path, :notice => t('devise.failure.unauthenticated')
+      end
+    end
+
 
     def show
       find_post
